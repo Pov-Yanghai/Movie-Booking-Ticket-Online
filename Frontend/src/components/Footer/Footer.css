@@ -1,0 +1,123 @@
+
+.footer {
+  background-color: #222;
+  color: white;
+  padding: 50px 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+
+.footer h3 {
+  color: #FFC300;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+  color: #FFC300;
+}
+
+
+.app-icons a {
+  margin: 0 15px;
+}
+
+.app-icons svg {
+  cursor: pointer;
+}
+
+
+.social-icons a {
+  margin: 0 10px;
+}
+
+.social-icons svg {
+  cursor: pointer;
+}
+
+
+.payment-icons a {
+  margin: 0 15px;
+}
+
+.payment-icons svg {
+  cursor: pointer;
+}
+
+
+@media (max-width: 768px) { 
+  .footer {
+    padding: 30px 10px;
+    flex-direction: column;
+    align-items: center; 
+    text-align: center;
+  }
+
+  
+  .footer-section {
+    width: 100%; 
+    margin-bottom: 20px;
+  }
+
+ 
+  .app-icons, .social-icons, .payment-icons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  
+  .app-icons a, .social-icons a, .payment-icons a {
+    margin: 0 8px; 
+  }
+
+
+  .footer h3 {
+    font-size: 1.1rem; 
+    margin-bottom: 10px;
+  }
+
+
+  .footer-section ul li a {
+    font-size: 0.9rem; 
+  }
+}
+
+@media (max-width: 480px) { 
+  .footer {
+    padding: 20px 10px;
+  }
+
+  
+  .footer-section {
+    width: 100%; 
+    margin-bottom: 15px;
+  }
+
+  
+  .app-icons, .social-icons, .payment-icons {
+    justify-content: center; 
+    gap: 10px; 
+  }
+
+  .app-icons a, .social-icons a, .payment-icons a {
+    margin: 0; 
+  }
+}

@@ -1,0 +1,260 @@
+.hero {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  padding: 4rem 2rem;
+  color: white;
+  background-color: #1a1a1a;
+  margin-top: 100px;
+  
+}
+
+.hero-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.rating-badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  display: inline-block;
+  backdrop-filter: blur(5px);
+  margin-bottom: 2rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.title {
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.subtitle {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  font-weight: 300;
+  opacity: 0.9;
+}
+
+.description {
+  font-size: 1.2rem;
+  margin-bottom: 2.5rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.cta-container {
+  margin-bottom: 3rem;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  border-radius: 30px;
+  background-color: #e50914;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.cta-button:hover {
+  background-color: #b2070f;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.search-container {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  padding: 0.5rem;
+  backdrop-filter: blur(5px);
+}
+
+.search-input {
+  flex: 1;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 1rem;
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.search-button {
+  padding: 1rem;
+  border-radius: 50%;
+  border: none;
+  background: #e50914;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.search-button:hover {
+  background: #b2070f;
+  transform: scale(1.1);
+}
+
+.search-button svg {
+  fill: currentColor;
+  width: 20px;
+  height: 20px;
+}
+.search-results {
+  margin: 2rem auto 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  padding: 0 1rem;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.movie-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  overflow: hidden;
+  width: 100%;
+  height: auto;
+  max-width: 300px; 
+  padding: 0 10px 10px 10px;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+}
+
+.movie-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px 10px 0 0;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.movie-details h3 {
+  font-size: 0.9rem;
+  margin-bottom: 0.6rem;
+}
+
+.movie-details p {
+  font-size: 0.4rem;
+  opacity: 0.4;
+  
+
+}
+
+.no-results {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  opacity: 0.8;
+}
+
+
+.animate-fade {
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.animate-slide {
+  animation: slideUp 1s ease-out forwards;
+}
+
+.animate-zoom {
+  animation: zoomIn 1s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: 70vh;
+    padding: 2rem 1rem;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .search-container {
+    max-width: 90%;
+  }
+
+
+  .search-results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .movie-card {
+    width: 100%;
+    max-width: 180px; 
+    text-align: center;
+  }
+
+  .movie-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .movie-card {
+    max-width: 150px; 
+  }
+
+  .movie-image {
+    height: 200px; 
+  }
+}

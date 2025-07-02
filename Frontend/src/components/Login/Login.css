@@ -1,0 +1,121 @@
+
+.login-section {
+    background: rgba(0, 0, 0, 0.9);
+    padding: 30px;
+    margin-top: 50px;
+    border-radius: 15px;
+    animation: slideInUp 1s ease-out;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    max-width: 400px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+
+  
+    
+}
+
+
+.login-section h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #FFC300;
+}
+
+
+.login-section input {
+    width: 100%;
+    max-width: 350px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 20px;
+    border: 1px solid #7f7373;
+    outline: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    background: rgb(248, 243, 243);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login-section input:focus {
+    transform: scale(1.05);
+}
+
+
+.login-section button {
+    width: 100%;
+    max-width: 350px;
+    padding: 10px;
+    background: linear-gradient(135deg, #1a5c25, #4CAF50);
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login-section button:hover {
+    background: linear-gradient(135deg, #4CAF50, #1a5c25);
+    transform: scale(1.05);
+}
+
+
+.login-section p {
+    margin-top: 10px;
+    text-align: center;
+    color: white;
+}
+
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+@media (max-width: 768px) {
+    .login-section {
+        padding: 20px;
+        margin-top:100px;
+        width: 95%;
+
+    }
+
+    .login-section input,
+    .login-section button {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-section {
+        padding: 15px;
+    }
+
+    .login-section h2 {
+        font-size: 1.5em;
+    }
+
+    .login-section input {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .login-section button {
+        font-size: 14px;
+        padding: 8px;
+    }
+}

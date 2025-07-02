@@ -1,0 +1,22 @@
+.showtimes-container {
+  padding-top:70px;
+}
+.days-list {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  
+}
+
+.days-list button {
+  padding: 10px 15px;
+  border: none;
+  background-color: #eee;
+  cursor: pointer;
+}
+
+.days-list button.active {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}

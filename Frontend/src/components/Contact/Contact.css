@@ -1,0 +1,140 @@
+
+.contact-container {
+  width: 95%; 
+  max-width: 1200px;
+  margin-top: 90px;
+  padding: 30px;
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  color: #e0e0e0;
+  box-sizing: border-box;
+  overflow: hidden; 
+  
+}
+.contact-container h1 {
+  text-align: center;
+  padding-bottom: 20px;
+
+}
+
+.contact-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.hotline, .advertising {
+  background-color: #282828;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+.hotline h2, .advertising h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  color: #ffffff;
+}
+
+.hotline p, .advertising p {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  color: #b0b0b0;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  color: #4CAF50;
+}
+
+.contact-form {
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.form-group input, .form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #404040;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  background-color: #333333;
+  color: #e0e0e0;
+}
+
+.submit-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  width: 100%; 
+}
+
+.submit-btn:hover {
+  background-color: #45a049;
+}
+
+/* Fix layout for tablets */
+@media (max-width: 768px) {
+  .contact-info {
+    grid-template-columns: 1fr; 
+    gap: 15px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .contact-container {
+    width: 100%; 
+    padding: 15px;
+  }
+
+  .hotline, .advertising {
+    padding: 15px;
+    width: 100%; 
+    
+  }
+
+  .form-group input, .form-group textarea {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 14px;
+  }
+
+  h2 {
+    font-size: 1rem;
+  }
+}
+
+
+body {
+  overflow-x: hidden;
+}
