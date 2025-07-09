@@ -1,64 +1,74 @@
-import Booking from '../models/booking.model.js';
-import Movie from '../models/movies.model.js';
-import Showtime from '../models/showtime.model.js';
-import Seat from '../models/seat.model.js';
+import { Booking, BookedSeat, Seat, Payment } from "../models/index.js";
+import { Op } from 'sequelize';
 
 export const createBooking = async (req, res) => {
   try {
-    const { showtimeId, seatIds, totalPrice } = req.body;
+    const { name, phone, selectedSeats, movieId, moviePrice, showtimeId } =
+      req.body;
+    const userId = req.user.id;
 
-    if (!showtimeId || !seatIds || seatIds.length === 0) {
-      return res.status(400).json({ message: 'Showtime and seat(s) are required' });
+    if (!selectedSeats || selectedSeats.length === 0) {
+      return res.status(400).json({ message: "No seats selected" });
     }
 
-    const userId = req.user.id;
-
-    // Create booking with user, showtime and total price
-    const booking = await Booking.create({ userId, showtimeId, total_price: totalPrice });
-
-    // Update seat statuses and assign them to this booking
-    await Promise.all(seatIds.map(async (seatId) => {
-      await Seat.update(
-        {
-          isBooked: true,
-          bookingId: booking.id
-        },
-        {
-          where: {
-            id: seatId,
-            showtimeId
-          }
-        }
-      );
-    }));
-
-    res.status(201).json({ message: 'Booking created successfully', bookingId: booking.id });
-  } catch (error) {
-    console.error('Error creating booking:', error);
-    res.status(500).json({ message: 'Server error' });
-  }
-};
-
-export const getUserBookings = async (req, res) => {
-  try {
-    const userId = req.user.id;
-
-    const bookings = await Booking.findAll({
-      where: { userId },
-      include: [
-        {
-          model: Showtime,
-          include: [Movie]
-        },
-        {
-          model: Seat
-        }
-      ]
+    const existing = await BookedSeat.findAll({
+      where: {
+        showtimeId,
+        seat_number: { [Op.in]: selectedSeats },
+      },
     });
 
-    res.json(bookings);
-  } catch (error) {
-    console.error('Error fetching user bookings:', error);
-    res.status(500).json({ message: 'Server error' });
+    if (existing.length > 0) {
+      return res.status(409).json({
+        message: "Some seats are already booked",
+        seats: existing.map((seat) => seat.seat_number),
+      });
+    }
+
+    const total_price = selectedSeats.length * moviePrice;
+    const booking = await Booking.create({
+      userId,
+      movieId,
+      showtimeId,
+      name,
+      phone,
+      total_price,
+    });
+
+    await Promise.all(
+      selectedSeats.map((seat) =>
+        Seat.create({ seat_number: seat, bookingId: booking.id })
+      )
+    );
+
+    await Promise.all(
+      selectedSeats.map((seat) =>
+        BookedSeat.create({ seat_number: seat, showtimeId, userId })
+      )
+    );
+
+    // Generate QR Code before sending response
+    const staticQrImageUrl =
+      "http://localhost:5000/public/QR_Code_For_Payment.jpg";
+
+    // Save payment info
+    await Payment.create({
+      bookingId: booking.id,
+      method: "qr",
+      qrCodeUrl: staticQrImageUrl,
+      status: "pending",
+    });
+
+    // Return booking success + QR image URL
+    res.status(201).json({
+      message: "Booking successful",
+      bookingId: booking.id,
+      qrCode: staticQrImageUrl,
+    });
+  } catch (err) {
+    console.error("Booking error:", err);
+    res
+      .status(500)
+      .json({ message: "Failed to book seats", error: err.message });
   }
 };

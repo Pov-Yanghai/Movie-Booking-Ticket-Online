@@ -3,6 +3,7 @@ import sequelize from '../utils/db.js';
 
 const BookedSeat = sequelize.define('BookedSeat', {
   seat_number: { type: DataTypes.STRING, allowNull: false },
+  showtimeId: { type: DataTypes.INTEGER, allowNull: false },
   booking_time: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
 }, {
   indexes: [

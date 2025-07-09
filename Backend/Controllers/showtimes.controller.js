@@ -14,6 +14,7 @@ export const getMoviesByDay = async (req, res) => {
     const movies = await Movie.findAll({
       include: [{
         model: Showtime,
+        as: 'showtimes',
         where: sequelize.where(
           sequelize.fn('LOWER', sequelize.col('Showtimes.day')),
           day.toLowerCase()

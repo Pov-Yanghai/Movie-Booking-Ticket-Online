@@ -126,7 +126,8 @@ const movies = [
       
 
 
-    }
+    },
+    
  
 ];
 
@@ -167,3 +168,4 @@ const seedMovies = async () => {
 
 // seedMovies();
 export { seedMovies };
+seedMovies();

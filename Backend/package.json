@@ -9,6 +9,7 @@
     "jsonwebtoken": "^9.0.2",
     "multer": "^2.0.1",
     "mysql2": "^3.14.1",
+    "qrcode": "^1.5.4",
     "react-router-dom": "^7.6.3",
     "sequelize": "^6.37.7"
   },
@@ -25,5 +26,8 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
 }

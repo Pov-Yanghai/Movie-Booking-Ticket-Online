@@ -1,9 +1,10 @@
 import Booking from '../models/booking.model.js';
 
 const bookings = [
-  { name: 'John Doe', phone: '012345678', total_price: 20.0 },
-  { name: 'Jane Smith', phone: '098765432', total_price: 15.0 }
+  { userId: 1, movieId: 1, showtimeId: 1, name: 'John Doe', phone: '012345678', total_price: 20.0 },
+  { userId: 2, movieId: 2, showtimeId: 2, name: 'Jane Smith', phone: '098765432', total_price: 15.0 }
 ];
+
 
 export const seedBookings = async () => {
   for (const booking of bookings) {
@@ -16,3 +17,4 @@ export const seedBookings = async () => {
     }
   }
 };
+seedBookings();

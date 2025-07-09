@@ -26,6 +26,7 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/movies" element={<Moviespage />} />
+          <Route path="/booking-seat" element={<BookingSeat />}/>
           <Route path="/movies/:id" element={<MovieDetail />} />
           <Route path="/booking/:id" element={<BookingSeat />} />
           <Route path="/booking" element={<Booking />} />

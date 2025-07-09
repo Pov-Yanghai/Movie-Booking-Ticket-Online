@@ -11,12 +11,13 @@ import authMiddleware from './middleware/auth.middleware.js';
 import logger from './middleware/logger.middleware.js';
 import movieRoutes from './routes/movies.routes.js';
 import showtimeRoutes from './routes/showtimes.routes.js';
-
+import bookingRoutes from './routes/booking.routes.js';
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+app.use('/public', express.static('public'));
 // Middlewares
 app.use(cors());
 app.use(express.json());
@@ -30,6 +31,7 @@ app.use('/images', express.static(path.resolve('public/images')));
 app.use('/api/auth', authRoutes);
 app.use('/api/movies', movieRoutes);
 app.use('/api', showtimeRoutes);
+app.use('/api/bookings', bookingRoutes);
 
 // Protected route example
 app.get('/api/protected', authMiddleware, (req, res) => {

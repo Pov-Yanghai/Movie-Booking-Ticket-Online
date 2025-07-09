@@ -3,26 +3,40 @@ import Movie from './movies.model.js';
 import Showtime from './showtime.model.js';
 import Booking from './booking.model.js';
 import Seat from './seat.model.js';
-import BookedSeat from './bookedseat.model.js'
+import BookedSeat from './bookedseat.model.js';
+import Payment from './payment.model.js';
+// User → Bookings
+User.hasMany(Booking, { foreignKey: 'userId', as: 'bookings' });
+Booking.belongsTo(User, { foreignKey: 'userId', as: 'user' });
 
-// Relationships
-User.hasMany(Booking);
-Booking.belongsTo(User);
+// User → BookedSeats
+User.hasMany(BookedSeat, { foreignKey: 'userId', as: 'bookedSeats' });
+BookedSeat.belongsTo(User, { foreignKey: 'userId', as: 'user' });
 
-Movie.hasMany(Booking);
-Booking.belongsTo(Movie);
+// =========================
+// Movies
+// =========================
 
-Movie.hasMany(Showtime);
-Showtime.belongsTo(Movie);
+// Movie → Bookings
+Movie.hasMany(Booking, { foreignKey: 'movieId', as: 'bookings' });
+Booking.belongsTo(Movie, { foreignKey: 'movieId', as: 'movie' });
 
-Booking.hasMany(Seat);
-Seat.belongsTo(Booking);
+// Movie → Showtimes
+Movie.hasMany(Showtime, { foreignKey: 'movieId', as: 'showtimes' });
+Showtime.belongsTo(Movie, { foreignKey: 'movieId', as: 'movie' });
 
-Showtime.hasMany(BookedSeat);
-BookedSeat.belongsTo(Showtime);
+// Booking → Seats
+Booking.hasMany(Seat, { foreignKey: 'bookingId', as: 'seats' });
+Seat.belongsTo(Booking, { foreignKey: 'bookingId', as: 'booking' });
 
-User.hasMany(BookedSeat);
-BookedSeat.belongsTo(User);
+// Showtime → BookedSeats
+Showtime.hasMany(BookedSeat, { foreignKey: 'showtimeId', as: 'bookedSeats' });
+BookedSeat.belongsTo(Showtime, { foreignKey: 'showtimeId', as: 'showtime' });
+
+//Booking -> Payment 
+Booking.hasOne(Payment, { foreignKey: 'bookingId', as: 'payment' });
+Payment.belongsTo(Booking, { foreignKey: 'bookingId', as: 'booking' });
+
 
 export {
   User,
@@ -30,5 +44,6 @@ export {
   Showtime,
   Booking,
   Seat,
-  BookedSeat
+  BookedSeat,
+  Payment
 };

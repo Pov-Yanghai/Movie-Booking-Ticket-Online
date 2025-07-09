@@ -10,9 +10,9 @@ export const seedUsers = async () => {
     const exists = await User.findOne({ where: { email: user.email } });
     if (!exists) {
       await User.create(user);
-      console.log(`✅ User added: ${user.email}`);
+      console.log(` User added: ${user.email}`);
     } else {
-      console.log(`⚠️ User already exists: ${user.email}`);
+      console.log(` User already exists: ${user.email}`);
     }
   }
 };
