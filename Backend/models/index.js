@@ -33,9 +33,6 @@ Seat.belongsTo(Booking, { foreignKey: 'bookingId', as: 'booking' });
 Showtime.hasMany(BookedSeat, { foreignKey: 'showtimeId', as: 'bookedSeats' });
 BookedSeat.belongsTo(Showtime, { foreignKey: 'showtimeId', as: 'showtime' });
 
-//Booking -> Payment 
-Booking.hasOne(Payment, { foreignKey: 'bookingId', as: 'payment' });
-Payment.belongsTo(Booking, { foreignKey: 'bookingId', as: 'booking' });
 
 
 export {
