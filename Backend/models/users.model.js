@@ -14,7 +14,12 @@ const User = sequelize.define('User', {
   image: {
     type: DataTypes.STRING,
     allowNull: true
+  },
+  role: {
+    type: DataTypes.STRING,
+    defualtValue: 'user'
   }
+
 }, {
   tableName: 'users',
   timestamps: true

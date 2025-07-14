@@ -6,14 +6,14 @@ import "./BookingSeat.css";
 const BookingSeat = () => {
   const location = useLocation();
   const { id } = useParams();
-  const moviePrice = location.state?.moviePrice || 10;
-  const showtimeId = id || location.state?.showtimeId;
-  const movieId = location.state?.movieId;
+  const { movieId, showtimeId, screen, time, day, moviePrice } = location.state; // edited new
 
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [bookedSeats, setBookedSeats] = useState([]);
   const [userInfo, setUserInfo] = useState({ name: "", phone: "" });
   const [qrCode, setQrCode] = useState(null);
+
+  // for movie detail 
 
   const rows = ["A", "B", "C", "D", "E", "F"];
   const cols = Array.from({ length: 8 }, (_, i) => i + 1);

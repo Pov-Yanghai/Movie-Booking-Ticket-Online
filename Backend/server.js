@@ -10,8 +10,10 @@ import authRoutes from './routes/auth.routes.js';
 import authMiddleware from './middleware/auth.middleware.js';
 import logger from './middleware/logger.middleware.js';
 import movieRoutes from './routes/movies.routes.js';
-import showtimeRoutes from './routes/showtimes.routes.js';
-import bookingRoutes from './routes/booking.routes.js';
+import showtimeRoutes from './routes/showtimes.routes.js'; // showtimes routes 
+import bookingRoutes from './routes/booking.routes.js'; // booking routes
+import adminRoutes from './routes/admin.routes.js'; // admin routes 
+
 dotenv.config();
 
 const app = express();
@@ -20,18 +22,22 @@ const PORT = process.env.PORT || 5000;
 app.use('/public', express.static('public'));
 // Middlewares
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); 
 app.use(logger);
 
 // Static files
-app.use('/uploads', express.static('uploads'));
+
 app.use('/images', express.static(path.resolve('public/images')));
 
 // API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/movies', movieRoutes);
 app.use('/api', showtimeRoutes);
+app.use('/api/showtimes', showtimeRoutes);
 app.use('/api/bookings', bookingRoutes);
+app.use('/api/admin', adminRoutes); // added admin routes 
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));   //When admin uploads images or files, it often saves in a local uploads folder   ./uploads/images
+/// app.get('/api/test', (req, res) => res.json({ message: 'Test works!' }));   test api
 
 // Protected route example
 app.get('/api/protected', authMiddleware, (req, res) => {

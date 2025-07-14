@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+// import * as jwt_decode from 'jwt-decode';
+import { jwtDecode} from 'jwt-decode'; // Import jwt-decode to decode JWT tokens
+ // decode token and check role
 import './Login.css';
 
 const Login = () => {
@@ -31,7 +34,15 @@ const Login = () => {
         // Save token to localStorage so it can be used in protected routes
         localStorage.setItem('token', data.token);
 
-        navigate('/movies'); // redirect to protected page
+        // added new for admin login 
+        const decoded = jwtDecode(data.token);
+        const userRole = decoded.role; // decode token to get user role
+        if (userRole === 'admin') {
+          navigate('/admin'); // redirect to admin dashboard if user is admin
+        } else {
+
+         navigate('/movies'); // redirect to movies page for regular users
+        } 
       } else {
         alert(data.message || 'Invalid email or password');
       }

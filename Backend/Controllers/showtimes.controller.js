@@ -44,3 +44,19 @@ export const getAllShowtimes = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+export const getShowtimesByMovieId = async (req, res) => {
+  try {
+    const movieId = req.params.movieId;
+
+    const showtimes = await Showtime.findAll({
+      where: { movieId }, // foreign key is 'movieId'
+      attributes: ['id', 'day', 'time', 'screen'],
+      order: [['day', 'ASC'], ['time', 'ASC']],//sorting
+    });
+
+    res.json(showtimes);
+  } catch (error) {
+    console.error('Error fetching showtimes by movie:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};

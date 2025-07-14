@@ -11,12 +11,13 @@ import Contactpage from './pages/Contactpage';
 import Signuppage from './pages/Signuppage'; 
 import Profilepage from './pages/Profilepage';
 import BookingSeat from './components/Booking/BookingSeat';
+import AdminPage from './pages/AdminPage'; // Import AdminPage
 import './App.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 function AppContent() {
   const location = useLocation();
-  const hideFooterRoutes = ['/login', '/signup'];
+  const hideFooterRoutes = ['/login', '/signup','/admin'];
   const isBookingRoute = matchPath('/booking/:id', location.pathname);
 
   return (
@@ -34,6 +35,7 @@ function AppContent() {
           <Route path="/login" element={<Loginpage />} />
           <Route path="/signup" element={<Signuppage />} />
           <Route path="/profile" element={<Profilepage />} />
+          <Route path="/admin" element={<AdminPage />} /> 
         </Routes>
       </main>
       {!hideFooterRoutes.includes(location.pathname) && !isBookingRoute && <Footer />}
