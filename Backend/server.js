@@ -34,6 +34,7 @@ app.use('/images', express.static(path.resolve('public/images')));
 // API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/movies', movieRoutes);
+
 app.use('/api', showtimeRoutes);
 app.use('/api/showtimes', showtimeRoutes);
 app.use('/api/bookings', bookingRoutes);

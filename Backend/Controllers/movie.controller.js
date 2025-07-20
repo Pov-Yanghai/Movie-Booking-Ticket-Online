@@ -1,6 +1,6 @@
 import Movie from '../models/movies.model.js';
 import Showtime from '../models/showtime.model.js';  // import your Showtime model
-
+import {Op} from 'sequelize';
 // Get all movies, optionally filter by day query param
 export const getAllMovies = async (req, res) => {
   try {
@@ -69,5 +69,24 @@ export const getMovieById = async (req, res) => {
   }
 };
 
-//  Create movie 
+// Search Movie apply in Booking Section 
+export const searchMovies = async (req, res) => {
+  const { q } = req.query;
+  try {
+    const movies = await Movie.findAll({
+      where: {
+        title: {
+          [Op.like]: `%${q}%`  // <-- use Op.like for MySQL
+        }
+      }
+    });
 
+    if (!movies.length) {
+      return res.status(404).json({ message: "Movie not found" });
+    }
+    res.json(movies);
+  } catch (error) {
+    console.error('Error searching movies:', error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+};
