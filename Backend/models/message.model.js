@@ -6,6 +6,6 @@ const Message = sequelize.define('Message', {
   email: { type: DataTypes.STRING, allowNull: false },
   subject: { type: DataTypes.STRING },
   message: { type: DataTypes.TEXT, allowNull: false }
-}, { timestamps: true });
+}, { timestamps: true, tableName: 'messages' });
 
 export default Message;

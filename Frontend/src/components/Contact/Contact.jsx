@@ -7,11 +7,25 @@ function Contact() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    // Here you can handle form submission, like sending the data to a server
-    alert('Message sent!');
-  };
+    //  connect from frontend to backend
+    try {
+      await fetch('http://localhost:5000/api/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message })
+
+      });
+    alert('Message sent successfully!');
+    setName(''); // Clear the name field
+    setEmail(''); // Clear the email field 
+    setMessage('');// Clear the message field
+    } catch (error) {
+      console.error('Error sending message:', error);
+      alert('Failed to send message. Please try again later.');
+    }
+};
 
   return (
     <div className="contact-container">

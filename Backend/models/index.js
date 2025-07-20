@@ -5,6 +5,7 @@ import Booking from './booking.model.js';
 import Seat from './seat.model.js';
 import BookedSeat from './bookedseat.model.js';
 import Payment from './payment.model.js';
+import Message from './message.model.js';
 // User → Bookings
 User.hasMany(Booking, { foreignKey: 'userId', as: 'bookings' });
 Booking.belongsTo(User, { foreignKey: 'userId', as: 'user' });
@@ -44,5 +45,6 @@ export {
   Booking,
   Seat,
   BookedSeat,
-  Payment
+  Payment,
+  Message
 };

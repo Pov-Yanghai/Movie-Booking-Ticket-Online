@@ -72,3 +72,15 @@ export const getShowtimesByMovieId = async (req, res) => {
   }
 };
 
+export const getRecentBookings = async (req, res) => {
+  try {
+    const bookings = await Booking.findAll({
+      order: [['createdAt', 'DESC']],
+      limit: 10,
+    });
+    res.json(bookings);
+  } catch (error) {
+    console.error('Error fetching recent bookings:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
