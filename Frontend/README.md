@@ -69,7 +69,7 @@ moviebook/
 
 ## Contact
  Development Team
-📧 Team4@company.com
+📧 Team7@company.com
 📞 +855 96 7817889
 
 Cinema Partnerships

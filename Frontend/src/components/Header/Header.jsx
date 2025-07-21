@@ -5,30 +5,36 @@ import LogoProfile from './LogoProfile';
 import axios from 'axios';
 
 function Header() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+  const [menuOpen, setMenuOpen] = useState(false); // mobile menu 
+  const [searchTerm, setSearchTerm] = useState(''); // state for search  bar text input 
+  const [searchResults, setSearchResults] = useState([]); // state for store search results from API 
 
+// AUto fetch movies when typing(debounce)
   useEffect(() => {
+    // Async function to fetch movies from backend API with searchTerm as query
     const fetchMovies = async () => {
       if (searchTerm.trim() === '') {
+        // if search box is empty, clear results
         setSearchResults([]);
+    
         return;
       }
+      // call backend API to search movies
       try {
         const res = await axios.get(`http://localhost:5000/api/movies/search?q=${searchTerm}`);
-        setSearchResults(res.data);
+        setSearchResults(res.data); // save result in state
       } catch (err) {
         console.error(err);
       }
     };
-
+    // Debounce: wait 300ms= 0.3S after user stops typing before api called
     const delayDebounce = setTimeout(() => {
       fetchMovies();
     }, 300); // debounce for smooth typing
-
+ // Clean up the timeout if user types again quickly
     return () => clearTimeout(delayDebounce);
   }, [searchTerm]);
+  // Manually fetch when clicking "Search" button
   const fetchMoviesNow = () => {
     fetchMovies();
   }
@@ -60,6 +66,7 @@ function Header() {
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
     />
+    {/* If results exist, show dropdown below input */}
     {searchResults.length > 0 && (
       <div className="search-dropdown">
         {searchResults.map((movie) => (
@@ -67,7 +74,7 @@ function Header() {
             key={movie.id}
             to={`/movies/${movie.id}`}
             className="search-dropdown-item"
-            onClick={() => setSearchTerm('')}
+            onClick={() => setSearchTerm('')}  // Cealr input after click 
           >
             {movie.title}
           </Link>
@@ -81,9 +88,6 @@ function Header() {
       <LogoProfile />
       <div className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>☰</div>
      
-        
-
-       
       </div>
     </header>
   );

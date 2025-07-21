@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {
-  PhoneIcon,EnvelopeIcon,ChatBubbleLeftIcon,FilmIcon,PlusCircleIcon,HomeIcon,CurrencyDollarIcon,XMarkIcon,DeviceTabletIcon,ChartBarIcon,UserIcon,TicketIcon,StarIcon,} from "@heroicons/react/24/outline";
+  PhoneIcon,EnvelopeIcon,ChatBubbleLeftIcon,FilmIcon,PlusCircleIcon,HomeIcon,CurrencyDollarIcon,XMarkIcon,DeviceTabletIcon,ChartBarIcon,UserIcon,TicketIcon,StarIcon,} from "@heroicons/react/24/outline";   // import icons from HEroIcons Library 
 import {
-  BarChart,Bar, LineChart,Line,PieChart,Pie,XAxis,YAxis,CartesianGrid,Tooltip,Legend,ResponsiveContainer,Cell,} from "recharts";
+  BarChart,Bar, LineChart,Line,PieChart,Pie,XAxis,YAxis,CartesianGrid,Tooltip,Legend,ResponsiveContainer,Cell,} from "recharts"; // import charts from Recharts Library 
 
 const COLORS = [
   "#3182CE",
@@ -14,31 +14,31 @@ const COLORS = [
   "#319795",
   "#D69E2E",
   "#4C51BF",
-];
-
+]; // color list for Pie chart
+// React State for manage data
 const AdminDashboard = () => {
-  const [movies, setMovies] = useState([]);
-  const [income, setIncome] = useState(0);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [selectedDay, setSelectedDay] = useState("");
-  const [activeTab, setActiveTab] = useState("dashboard");
+  const [movies, setMovies] = useState([]); // store movie data
+  const [income, setIncome] = useState(0);  // store total income that starts from 0 
+  const [loading, setLoading] = useState(true); // show loading while fetching 
+  const [error, setError] = useState("");  // show error if fetching fails
+  const [selectedDay, setSelectedDay] = useState(""); // for filtering by day 
+  const [activeTab, setActiveTab] = useState("dashboard"); // for switching tab views
   const [showtimes, setShowtimes] = useState([
-    { day: "", time: "", screen: "" },
+    { day: "", time: "", screen: "" },  // store movie showtimes
   ]);
-  const [messages, setMessages] = useState([]);
-  const [messagesLoading, setMessageLoading] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [analyticsData, setAnalyticsData] = useState(null);
-  const [totalUsers, setTotalUsers] = useState(0);
-  const [recentBookings, setRecentBookings] = useState([]);
-
+  const [messages, setMessages] = useState([]); // store messages 
+  const [messagesLoading, setMessageLoading] = useState(false);// loading for messages
+  const [sidebarOpen, setSidebarOpen] = useState(true);// Toggle sidebar
+  const [analyticsData, setAnalyticsData] = useState(null); // Store Analysis data
+  const [totalUsers, setTotalUsers] = useState(0); // show total users 
+  const [recentBookings, setRecentBookings] = useState([]); // store recently booking 
+// function handle editing movie showtimes
   const handleShowtimeChange = (index, field, value) => {
     const updated = [...showtimes];
     updated[index][field] = value;
     setShowtimes(updated);
   };
-
+// filter movie by selected day
   const filteredMovies = selectedDay
     ? movies.filter((movie) =>
         movie.days
@@ -47,7 +47,7 @@ const AdminDashboard = () => {
           .includes(selectedDay.toLowerCase())
       )
     : movies;
-
+// form for movie data (Add/ Edit)
   const [form, setForm] = useState({
     id: null,
     title: "",
@@ -57,16 +57,18 @@ const AdminDashboard = () => {
     promotion: "",
   });
 
-  const [selectedMovieId, setSelectedMovieId] = useState(null);
+  const [selectedMovieId, setSelectedMovieId] = useState(null);  // for selected a movie to edit
 
-  // Fetch all necessary data
+  // Fetch all necessary data when the page load
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       const token = localStorage.getItem("token");
 
       try {
+        // Call API to fetch all required data in parallel 
         const [
+          
           moviesRes,
           incomeRes,
           usersRes,
@@ -91,14 +93,14 @@ const AdminDashboard = () => {
             headers: { Authorization: `Bearer ${token}` },
           }),
         ]);
-
+       // set state s with the fectchined data
         setMovies(moviesRes.data);
         setIncome(incomeRes.data.totalIncome || 0);
         setTotalUsers(usersRes.data.totalUsers || 0);
         setMessages(messagesRes.data);
         setRecentBookings(bookingsRes.data);
 
-        // Process analytics data
+        // Process analytics data for  charts
         const bookingsData = analyticsRes.data.map((item) => ({
           title: item.title,
           bookings: item.bookings,
@@ -117,7 +119,7 @@ const AdminDashboard = () => {
 
     fetchData();
   }, []);
-
+// Fetch showtimes fo ra specific movie by movie id
   const fetchShowtimes = async (movieId) => {
     const token = localStorage.getItem("token");
     try {
@@ -127,65 +129,66 @@ const AdminDashboard = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      setShowtimes(res.data);
-      setSelectedMovieId(movieId);
+      setShowtimes(res.data);  // store showtimes in state
+      setSelectedMovieId(movieId); // mark which movie is selected
     } catch (err) {
       console.error("Error fetching showtimes:", err);
-      setShowtimes([]);
+      setShowtimes([]); // if error ocuured, no showtimes to show 
     }
   };
-
+ // Delete movie by id
   const deleteMovie = async (id) => {
     const token = localStorage.getItem("token");
     try {
       await axios.delete(`http://localhost:5000/api/admin/movies/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setMovies((prev) => prev.filter((m) => m.id !== id));
+      setMovies((prev) => prev.filter((m) => m.id !== id));  // Remove the movie from the lists. It will find movie by id we want to delete then deleted it if it's correct.
       alert("Movie deleted successfully");
     } catch (err) {
       console.error("Delete failed:", err);
       alert("Failed to delete movie");
     }
   };
-
+ // fetch all user messages
   const fetchMessages = async () => {
-    setMessageLoading(true);
+    setMessageLoading(true);  // show loading while fetching 
     const token = localStorage.getItem("token");
 
     try {
       const res = await axios.get("http://localhost:5000/api/admin/messages", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setMessages(res.data);
+      setMessages(res.data); // save message in state
     } catch (err) {
       console.error("Error fetching messages:", err);
       setError("Failed to fetch messages.");
     } finally {
-      setMessageLoading(false);
+      setMessageLoading(false); // stop loading 
     }
   };
-
+// Refetch message when tab is 'messages'
   useEffect(() => {
     if (activeTab === "messages") {
       fetchMessages();
     }
   }, [activeTab]);
-
-  const handleFormChange = (e) => {
+// handle admin typing in form fields(movie form)
+  const handleFormChange = (e) => {  // keep other information the same just change on what admin want to change used for edited
     const { name, value, files } = e.target;
     if (name === "image") {
-      setForm((prev) => ({ ...prev, image: files[0] }));
+      setForm((prev) => ({ ...prev, image: files[0] })); //Update the image field with the uploaded file.
     } else {
-      setForm((prev) => ({ ...prev, [name]: value }));
+      setForm((prev) => ({ ...prev, [name]: value })); // Update the form field by its name and value.
     }
   };
-
+ // Handle form submit to create or update a movie
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
 
     try {
+      // Build form data for file upload
       const formData = new FormData();
       formData.append("title", form.title);
       formData.append("price", form.price);
@@ -195,7 +198,7 @@ const AdminDashboard = () => {
       formData.append("days", form.days);
       formData.append("promotion", form.promotion);
       formData.append("showtimes", JSON.stringify(showtimes));
-
+  // if updating exsiting movie 
       if (form.id) {
         await axios.put(
           `http://localhost:5000/api/admin/movies/${form.id}`,
@@ -209,6 +212,7 @@ const AdminDashboard = () => {
         );
         alert("Movie updated successfully");
       } else {
+        // adding new Movie
         const res = await axios.post(
           "http://localhost:5000/api/admin/movies",
           formData,
@@ -219,10 +223,10 @@ const AdminDashboard = () => {
             },
           }
         );
-        setMovies((prev) => [...prev, res.data]);
+        setMovies((prev) => [...prev, res.data]);  // Add new movie to list  keep other the same just add new 
         alert("Movie created successfully");
       }
-
+ // Reset form after submit 
       setForm({
         id: null,
         title: "",
@@ -238,7 +242,7 @@ const AdminDashboard = () => {
       alert("Failed to submit movie");
     }
   };
-
+// when clicking 'Edit' on a movie card
   const handleEditClick = (movie) => {
     setForm({
       id: movie.id,
@@ -250,7 +254,7 @@ const AdminDashboard = () => {
     });
     setActiveTab("form");
   };
-
+// reset from field to empty
   const resetForm = () => {
     setForm({
       id: null,
