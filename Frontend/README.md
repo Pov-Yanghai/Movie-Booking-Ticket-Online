@@ -22,7 +22,7 @@ A modern cinema ticket booking platform built with React.js, featuring real-time
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Pov-Yanghai/Frontend_Final_Project.git
+   git clone https://github.com/Pov-Yanghai/Movie-Booking-Ticket-Online.git
 2. Install dependencies
    npm install
    npm install react router-dom 
