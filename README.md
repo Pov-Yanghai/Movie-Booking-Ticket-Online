@@ -1,4 +1,4 @@
-# 🎥 MovieBook - Cinema Ticket Booking System (Fullstack)
+# 🎥 MovieBook - Movie Booking Ticket Online System (Fullstack)
 ## 📄 Project Overview
 MovieBook is a Fullstack Cinema Ticket Booking System with:
 
