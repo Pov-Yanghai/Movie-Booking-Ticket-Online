@@ -119,7 +119,7 @@ const AdminDashboard = () => {
 
     fetchData();
   }, []);
-// Fetch showtimes fo ra specific movie by movie id
+// Fetch showtimes for specific movie by movie id
   const fetchShowtimes = async (movieId) => {
     const token = localStorage.getItem("token");
     try {

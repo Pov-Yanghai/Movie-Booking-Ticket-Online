@@ -10,11 +10,6 @@ MovieBook is a Fullstack Cinema Ticket Booking System with:
 
 - 🎟️ Features: Movies, Showtimes, Seat Booking, Payments, Admin Dashboard
 
-## 📁 Project Structure
-MovieBook/
-├── Backend/     # Node.js, Express, Sequelize, MySQL (API)
-├── Frontend/    # React.js, Vite (Client)
-
 ## 🚀 Setup Guide (Step-by-Step)
 ## ✅ 1. Backend Setup
 cd Backend
