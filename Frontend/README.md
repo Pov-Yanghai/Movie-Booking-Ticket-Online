@@ -46,22 +46,6 @@ A modern cinema ticket booking platform built with React.js, featuring real-time
   -Heroicons
   -Date-fns (date handling)
   -Responsive Design (Flexbox/Grid)
-## Folder Structure
-moviebook/
-├── public/
-│   └── images/           # Movie posters & banners
-├── src/
-│   ├── components/       # Reusable UI components
-│   │   ├── Header/      # HEader for page
-│   │   ├── Body/        # Body stores Movies and with other pages 
-│   │   └── Footer/       # Footer to apply all pages in our web page 
-│   ├── pages/            # Route-specific views
-│   ├── data/             # Movie dataset (movies.js)
-│   └── App.jsx           # Root component
-|   |__ App.css         ## Global Styles
-|   |__ index.jsx     ## Entry point
-|_______index.html     ## Main HTML file 
-
 ## Exampple of Our Web page   
  Home	   Movies    Booking	   Contact  
        Movies container 
